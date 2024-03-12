@@ -1,0 +1,31 @@
+.btn-quantidade {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.75rem;
+    min-width: 2rem; /* Largura mínima definida para os botões */
+    margin: 0 0.2rem; /* Espaçamento entre os botões */
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background-color: #f8f9fa;
+    transition: right 0.3s ease-in-out;
+    padding: 20px;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar.open {
+    right: 0;
+}
+
+.produtos {
+    transition: margin-right 0.3s ease-in-out;
+}
+
+.produtos.sidebar-aberta {
+    margin-right: 300px;
+}
