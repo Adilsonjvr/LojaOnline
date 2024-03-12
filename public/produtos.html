@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos - AJRNutrition</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl">AJR Nutrition</h1>
+            <p>Bem-vindo à AJR Nutrition!</p>
+        </div>
+    </header>
+
+    <!-- Barra de navegação -->
+    <nav>
+        <div class="container mx-auto px-4 py-3">
+            <ul class="flex justify-center space-x-4">
+                <li><a href="#" class="hover:text-yellow-300">Página Inicial</a></li>
+                <li><a href="produtos.html" class="hover:text-yellow-300">Produtos</a></li>
+                <li><a href="#" class="hover:text-yellow-300">Carrinho</a></li>
+                <!-- Adicione mais links conforme necessário -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Seção de Produtos -->
+    <section id="produtos" class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Aqui serão inseridos os produtos dinamicamente -->
+        <!-- Seção de Produtos -->
+        <section id="produtos" class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Produto 1: Whey Protein -->
+            <!-- Produto 2: Creatina -->
+            <!-- Produto 3: Glutamina -->
+            <!-- Produto 4: Multivitamínico -->
+            <!-- Produto 5: Pré-Workout -->
+            <!-- Produto 6: Barras de Proteína -->
+            <!-- Produto 7: Beta Alanina -->
+        </section>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Loja de Suplementos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Barra Lateral do Carrinho -->
+    <div id="barra-lateral">
+        <h2>Carrinho de Compras</h2>
+        <div id="itens-carrinho"></div>
+        <button id="botao-ir-carrinho">Ir para o Carrinho</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

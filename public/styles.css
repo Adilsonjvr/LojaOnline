@@ -7,3 +7,130 @@
     opacity: 0;
     transition: opacity 0.3s;
 }
+
+
+/* Estilizando o cabeçalho */
+header {
+    background-color: #2C3E50;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+}
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+header p {
+    font-size: 1.2rem;
+}
+/* Estilizando a barra de navegação */
+nav {
+    background-color: #34495E;
+    padding: 1rem 0;
+}
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+nav ul li {
+    margin-right: 1.5rem;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+nav ul li a:hover {
+    color: #F39C12;
+}
+/* Estilizando os produtos */
+#produtos {
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+.produto {
+    background-color: #ECF0F1;
+    border-radius: 10px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.produto img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+.produto h2 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+.produto p {
+    color: #7F8C8D;
+    margin-bottom: 1rem;
+}
+.produto button {
+    background-color: #3498DB;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.produto button:hover {
+    background-color: #2980B9;
+}
+/* Estilizando o rodapé */
+footer {
+    background-color: #2C3E50;
+    color: white;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    clear: both;
+}
+/* Estilizando a barra lateral do carrinho */
+#barra-lateral {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    background-color: #ECF0F1;
+    width: 300px;
+    height: 100%;
+    overflow-y: auto;
+    padding: 1rem;
+    transition: right 0.3s ease;
+}
+#barra-lateral.aberto {
+    right: 0;
+}
+#itens-carrinho {
+    margin-bottom: 1rem;
+}
+#itens-carrinho .item {
+    margin-bottom: 0.5rem;
+}
+#botao-ir-carrinho {
+    background-color: #3498DB;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 1rem;
+}
+#botao-ir-carrinho:hover {
+    background-color: #2980B9;
+}
