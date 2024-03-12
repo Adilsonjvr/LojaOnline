@@ -1,62 +1,296 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos - AJRNutrition</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="styles.css" rel="stylesheet">
-</head>
-<body>
-    <!-- Cabeçalho -->
-    <header>
-        <div class="container mx-auto px-4 py-6">
-            <h1 class="text-3xl">AJR Nutrition</h1>
-            <p>Bem-vindo à AJR Nutrition!</p>
-        </div>
-    </header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Produtos - AJRNutrition</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <style>
+            /* Ajuste conforme necessário */
+            .sidebar {
+                position: fixed;
+                top: 0;
+                right: -300px; /* A barra lateral fica escondida por padrão */
+                width: 300px;
+                height: 100vh;
+                background-color: #f8f9fa;
+                transition: right 0.3s ease-in-out;
+                padding: 20px;
+                box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+            }
 
-    <!-- Barra de navegação -->
-    <nav>
-        <div class="container mx-auto px-4 py-3">
-            <ul class="flex justify-center space-x-4">
-                <li><a href="#" class="hover:text-yellow-300">Página Inicial</a></li>
-                <li><a href="produtos.html" class="hover:text-yellow-300">Produtos</a></li>
-                <li><a href="#" class="hover:text-yellow-300">Carrinho</a></li>
-                <!-- Adicione mais links conforme necessário -->
+            .sidebar.open {
+                right: 0; /* Mostra a barra lateral quando aberta */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Cabeçalho -->
+        <header class="bg-dark text-white py-4">
+            <div class="container">
+                <h1 class="text-center">AJRNutrition</h1>
+                <p class="text-center">Bem-vindo à AJRNutrition!</p>
+            </div>
+        </header>
+
+        <!-- Barra de navegação -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="index.html">Página Inicial</a>
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="produtos.html"
+                                >Produtos</a
+                            >
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="carrinho.html"
+                                >Carrinho</a
+                            >
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Barra lateral do carrinho -->
+        <div id="sidebar" class="sidebar">
+            <h5>Carrinho de Compras</h5>
+            <ul id="carrinho-lista" class="list-group">
+                <!-- Itens do carrinho serão adicionados aqui dinamicamente -->
             </ul>
+            <button id="esconder-sidebar" class="btn btn-secondary mt-3">
+                Esconder Carrinho
+            </button>
+            <button id="revisar-pedido" class="btn btn-primary mt-3">
+                Revisar Pedido
+            </button>
         </div>
-    </nav>
 
-    <!-- Seção de Produtos -->
-    <section id="produtos" class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        <!-- Aqui serão inseridos os produtos dinamicamente -->
+        <!-- Botão para mostrar/ocultar a barra lateral do carrinho -->
+        <button id="mostrar-sidebar" class="btn btn-primary mt-3">
+            Mostrar Carrinho
+        </button>
+
         <!-- Seção de Produtos -->
-        <section id="produtos" class="container mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <!-- Produto 1: Whey Protein -->
-            <!-- Produto 2: Creatina -->
-            <!-- Produto 3: Glutamina -->
-            <!-- Produto 4: Multivitamínico -->
-            <!-- Produto 5: Pré-Workout -->
-            <!-- Produto 6: Barras de Proteína -->
-            <!-- Produto 7: Beta Alanina -->
+        <section id="produtos" class="container mx-auto mt-8">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                <!-- Produto 1: Whey Protein -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Whey Protein"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Whey Protein</h5>
+                            <p class="card-text">
+                                Suplemento para ganho de massa muscular.
+                            </p>
+                            <p class="card-text"><strong>R$ 99.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(1)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 2: Creatina -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Creatina"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Creatina</h5>
+                            <p class="card-text">
+                                Suplemento para aumento de força e resistência.
+                            </p>
+                            <p class="card-text"><strong>R$ 29.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(2)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 3: Glutamina -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Glutamina"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Glutamina</h5>
+                            <p class="card-text">
+                                Suplemento para recuperação muscular.
+                            </p>
+                            <p class="card-text"><strong>R$ 39.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(3)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4: Multivitamínico -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Multivitamínico"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Multivitamínico</h5>
+                            <p class="card-text">
+                                Suplemento para saúde geral.
+                            </p>
+                            <p class="card-text"><strong>R$ 49.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(4)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 5: Pré-Workout -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Pré-Workout"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Pré-Workout</h5>
+                            <p class="card-text">
+                                Suplemento pré-treino para energia.
+                            </p>
+                            <p class="card-text"><strong>R$ 79.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(5)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 6: Barras de Proteína -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Barras de Proteína"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Barras de Proteína</h5>
+                            <p class="card-text">Snack proteico conveniente.</p>
+                            <p class="card-text"><strong>R$ 29.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(6)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 7: Beta Alanina -->
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <img
+                            src="https://via.placeholder.com/300x300"
+                            alt="Beta Alanina"
+                            class="card-img-top"
+                            style="object-fit: cover"
+                        />
+                        <div class="card-body">
+                            <h5 class="card-title">Beta Alanina</h5>
+                            <p class="card-text">
+                                Suplemento para aumentar a resistência.
+                            </p>
+                            <p class="card-text"><strong>R$ 44.99</strong></p>
+                        </div>
+                        <div class="card-footer">
+                            <button
+                                class="btn btn-primary btn-sm w-100"
+                                onclick="adicionarAoCarrinho(7)"
+                            >
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-    </section>
 
-    <!-- Rodapé -->
-    <footer>
-        <div class="container mx-auto px-4">
-            <p>&copy; 2024 Loja de Suplementos. Todos os direitos reservados.</p>
-        </div>
-    </footer>
+        <!-- Rodapé -->
+        <footer class="bg-dark text-white py-4 mt-auto">
+            <div class="container">
+                <p class="text-center">
+                    &copy; 2024 AJRNutrition. Todos os direitos reservados.
+                </p>
+            </div>
+        </footer>
 
-    <!-- Barra Lateral do Carrinho -->
-    <div id="barra-lateral">
-        <h2>Carrinho de Compras</h2>
-        <div id="itens-carrinho"></div>
-        <button id="botao-ir-carrinho">Ir para o Carrinho</button>
-    </div>
-
-    <script src="script.js"></script>
-</body>
+        <!-- Adicione o link para o Bootstrap JS no final do corpo para garantir um carregamento mais rápido da página -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="public/produtos.js" defer></script>
+        <script src="public/scripts.js"></script>
+    </body>
 </html>

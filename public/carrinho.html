@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho de Compras - AJRNutrition</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <header>
+        <div class="container mx-auto px-4 py-6">
+            <h1 class="text-3xl">AJR Nutrition</h1>
+            <p>Bem-vindo à AJR Nutrition!</p>
+        </div>
+    </header>
+
+    <!-- Barra de navegação -->
+    <nav>
+        <div class="container mx-auto px-4 py-3">
+            <ul class="flex justify-center space-x-4">
+                <li><a href="index.html" class="hover:text-yellow-300">Página Inicial</a></li>
+                <li><a href="produtos.html" class="hover:text-yellow-300">Produtos</a></li>
+                <li><a href="carrinho.html" class="hover:text-yellow-300">Carrinho</a></li>
+                <!-- Adicione mais links conforme necessário -->
+            </ul>
+        </div>
+    </nav>
+
+
+    <!-- Conteúdo do Carrinho de Compras -->
+    <div class="container mx-auto px-4 py-8">
+        <h2 class="text-2xl font-semibold mb-4">Carrinho de Compras</h2>
+        <div id="carrinho" class="grid gap-4"></div>
+        <div class="flex justify-between mt-8">
+            <button id="limpar-carrinho" class="bg-red-500 text-white py-2 px-4 rounded">Limpar Carrinho</button>
+            <button id="finalizar-compra" class="bg-green-500 text-white py-2 px-4 rounded">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer class="mt-8">
+        <div class="container mx-auto px-4">
+            <p>&copy; 2024 Loja de Suplementos. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
+
