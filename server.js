@@ -66,3 +66,21 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
     console.log(`Servidor está rodando em http://localhost:${PORT}`);
 });
+
+
+// Importar o SDK Parse
+const Parse = require('parse/node');
+
+// Inicializar o Parse com suas credenciais
+Parse.initialize("mMab4rnSBhM2cREa0WqSiCPRufeS7FqMbLtAcdc2", "BjHdqSpWH7p0Nbj5c8b6gQWotSy2bW6MZE8KtHgH");
+Parse.serverURL = 'https://parseapi.back4app.com/';
+
+// Exemplo de como usar o Parse para consultar dados de uma tabela
+const query = new Parse.Query('Produtos');
+query.find().then((results) => {
+    // Faça algo com os resultados
+    console.log(results);
+}).catch((error) => {
+    // Lidar com erros
+    console.error('Erro ao consultar dados:', error);
+});
