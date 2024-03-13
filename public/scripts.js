@@ -10,6 +10,90 @@ const produtos = [
 
 let carrinho = [];
 
+// Adicionar um item ao carrinho
+function adicionarAoCarrinho(nomeProduto, preco) {
+    const produtoSelecionado = produtos.find(
+        (produto) => produto.nome === nomeProduto,
+    );
+
+    if (produtoSelecionado) {
+        const itemExistente = carrinho.find((item) => item.nome === nomeProduto);
+
+        if (itemExistente) {
+            itemExistente.quantidade++;
+        } else {
+            carrinho.push({ ...produtoSelecionado, preco, quantidade: 1 });
+        }
+
+        // Atualizar a lista do carrinho
+        atualizarCarrinho();
+
+        // Calcular e exibir o total do carrinho
+        calcularTotalCarrinho();
+
+        // Atualizar o armazenamento local
+        localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+        // Atualizar o valor total do carrinho na página
+        atualizarTotalCarrinho();
+        
+    }
+}
+
+// Função para diminuir a quantidade de um item no carrinho
+function diminuirQuantidade(nomeProduto) {
+    const produtoExistente = carrinho.find((item) => item.nome === nomeProduto);
+
+    if (produtoExistente) {
+        if (produtoExistente.quantidade > 1) {
+            produtoExistente.quantidade--;
+        } else {
+            // Se a quantidade for igual a 1, remover o item do carrinho
+            const index = carrinho.indexOf(produtoExistente);
+            carrinho.splice(index, 1);
+        }
+    }
+
+    // Atualizar a lista do carrinho
+    atualizarCarrinho();
+
+    // Calcular e exibir o total do carrinho
+    calcularTotalCarrinho();
+
+    // Atualizar o armazenamento local
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    // Atualizar o valor total do carrinho na página
+    atualizarTotalCarrinho();
+}
+
+// Função para aumentar a quantidade de um item no carrinho
+function aumentarQuantidade(nomeProduto) {
+    const produtoExistente = carrinho.find((item) => item.nome === nomeProduto);
+
+    if (produtoExistente) {
+        produtoExistente.quantidade++;
+    }
+
+    // Atualizar a lista do carrinho
+    atualizarCarrinho();
+
+    // Calcular e exibir o total do carrinho
+    calcularTotalCarrinho();
+
+    // Atualizar o armazenamento local
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
+
+    // Atualizar o valor total do carrinho na página
+    atualizarTotalCarrinho();
+}
+
+// Verificar se há itens de carrinho armazenados no localStorage
+const carrinhoSalvo = localStorage.getItem("carrinho");
+if (carrinhoSalvo) {
+    carrinho = JSON.parse(carrinhoSalvo);
+}
+
 // JavaScript para mostrar/ocultar a barra lateral do carrinho
 const mostrarSidebarBtn = document.getElementById("mostrar-sidebar");
 const esconderSidebarBtn = document.getElementById("esconder-sidebar");
@@ -26,105 +110,68 @@ esconderSidebarBtn.addEventListener("click", () => {
     produtosSection.classList.remove("sidebar-aberta"); // Remove a classe para recuar os produtos
 });
 
-// Função para adicionar item ao carrinho
-function adicionarAoCarrinho(nomeProduto, precoProduto) {
-    // Verificar se o produto já está no carrinho
-    const produtoExistente = carrinho.find((item) => item.nome === nomeProduto);
+// Função para atualizar o carrinho na barra lateral
+function atualizarCarrinho() {
+    const carrinhoLista = document.getElementById("itens-carrinho");
 
-    if (produtoExistente) {
-        // Se o produto já estiver no carrinho, incrementar a quantidade
-        produtoExistente.quantidade++;
-    } else {
-        // Se o produto não estiver no carrinho, adicioná-lo
-        carrinho.push({
-            nome: nomeProduto,
-            preco: precoProduto,
-            quantidade: 1,
-        });
+    if (!carrinhoLista) {
+        console.error("Elemento 'itens-carrinho' não encontrado.");
+        return;
     }
 
-    // Atualizar a lista do carrinho
-    atualizarCarrinho();
+    carrinhoLista.innerHTML = ""; // Limpa a lista antes de atualizar
 
-    // Calcular e exibir o total do carrinho
-    calcularTotalCarrinho();
-
-    // Armazenar os itens do carrinho na sessão ou local storage
-    localStorage.setItem("carrinho", JSON.stringify(carrinho));
-}
-
-// Função para atualizar a lista do carrinho
-function atualizarCarrinho() {
-    const carrinhoLista = document.getElementById("carrinho-lista");
-
-    // Limpar a lista do carrinho
-    carrinhoLista.innerHTML = "";
-
-    // Adicionar os itens do carrinho à lista
-    carrinho.forEach((item, index) => {
+    carrinho.forEach((item) => {
         const itemHTML = `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    ${item.nome} - R$ ${item.preco} x ${item.quantidade}
-                    <div>
-                        <button class="btn btn-sm btn-secondary btn-quantidade" onclick="diminuirQuantidade(${index})">-</button>
-                        <span class="badge bg-light text-dark">${item.quantidade}</span>
-                        <button class="btn btn-sm btn-secondary btn-quantidade" onclick="adicionarQuantidade(${index})">+</button>
-                        <button class="btn btn-sm btn-danger" onclick="removerItemDoCarrinho(${index})">Remover</button>
-                    </div>
-                </li>
-            `;
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                    ${item.nome} - R$ ${item.preco.toFixed(2)} x ${
+                        item.quantidade
+                    }
+                </div>
+                <div class="input-group input-group-sm" style="width: 120px;">
+                    <button class="btn btn-secondary" onclick="diminuirQuantidade('${
+                        item.nome
+                    }')">-</button>
+                    <span class="input-group-text">${item.quantidade}</span>
+                    <button class="btn btn-secondary" onclick="aumentarQuantidade('${
+                        item.nome
+                    }')">+</button>
+                </div>
+            </li>
+        `;
         carrinhoLista.insertAdjacentHTML("beforeend", itemHTML);
     });
 }
 
-// Função para calcular e exibir o total do carrinho
+// Função para calcular o total do carrinho
 function calcularTotalCarrinho() {
-    const totalCarrinho = carrinho.reduce(
-        (total, item) => total + item.preco * item.quantidade,
-        0,
-    );
+    let total = 0;
+    carrinho.forEach((item) => {
+        total += item.preco * item.quantidade;
+    });
+    return total.toFixed(2);
+}
+
+// Função para atualizar o valor total do carrinho na página
+function atualizarTotalCarrinho() {
     const totalCarrinhoElement = document.getElementById("total-carrinho");
-    if (totalCarrinhoElement) {
-        // Verificar se o elemento existe antes de tentar acessá-lo
-        totalCarrinhoElement.textContent = `Total: R$ ${totalCarrinho.toFixed(
-            2,
-        )}`;
-    }
+    const totalCarrinho = calcularTotalCarrinho(); // Calcular o total do carrinho
+    totalCarrinhoElement.textContent = `Total: R$ ${totalCarrinho}`;
 }
 
-// Função para remover um item do carrinho
-function removerItemDoCarrinho(index) {
-    carrinho.splice(index, 1);
-    // Atualizar a lista do carrinho
-    atualizarCarrinho();
-    // Calcular e exibir o total do carrinho
-    calcularTotalCarrinho();
-}
-
-// Função para diminuir a quantidade do item no carrinho
-function diminuirQuantidade(index) {
-    if (carrinho[index].quantidade > 1) {
-        carrinho[index].quantidade--;
-        atualizarCarrinho();
-        calcularTotalCarrinho();
-    }
-}
-
-// Função para adicionar a quantidade de um item no carrinho
-function adicionarQuantidade(index) {
-    carrinho[index].quantidade++;
-    // Atualizar a lista do carrinho
-    atualizarCarrinho();
-    // Calcular e exibir o total do carrinho
-    calcularTotalCarrinho();
-}
-
-// Função para redirecionar para a página de carrinho de compras
+// Função para revisar o pedido
 function revisarPedido() {
+    // Armazenar o carrinho no localStorage
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
     // Redirecionar para a página de carrinho de compras
     window.location.href = "carrinho-de-compras.html";
 }
 
 // Adicionar um ouvinte de evento ao botão "Revisar Pedido"
 const revisarPedidoBtn = document.getElementById("revisar-pedido");
-revisarPedidoBtn.addEventListener("click", revisarPedido);
+if (revisarPedidoBtn) {
+    revisarPedidoBtn.addEventListener("click", revisarPedido);
+}
+atualizarCarrinho();
+calcularTotalCarrinho();
